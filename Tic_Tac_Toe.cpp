@@ -31,7 +31,7 @@ int winFive;
 int winSix;
 int winSeven;
 int winEight;
-
+// game start
     do{    
         cout << "So, do you want to play tictactoe?"<< endl;
     
