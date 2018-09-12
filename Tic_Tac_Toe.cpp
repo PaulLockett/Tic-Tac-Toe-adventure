@@ -4,389 +4,105 @@
 #include <string>
 #include <vector>
 #include <fstream>
-
 using namespace std;
 
+
+void draw(char g1[3][3], char g2[3][3], char g3[3][3], char g4[3][3], char g5[3][3], char g6[3][3], char g7[3][3], char g8[3][3], char g9[3][3]) {
+	system("cls");
+	cout << "_" << g1[0][0] << "_|_" << g1[0][1] << "_|_" << g1[0][2] << "_ || _" << g2[0][0] << "_|_" << g2[0][1] << "_|_" << g2[0][2] << "_ || _" << g3[0][0] << "_|_" << g3[0][1] << "_|_" << g3[0][2] << "_" << endl;
+	cout << "_" << g1[1][0] << "_|_" << g1[1][1] << "_|_" << g1[1][2] << "_ || _" << g2[1][0] << "_|_" << g2[1][1] << "_|_" << g2[1][2] << "_ || _" << g3[1][0] << "_|_" << g3[1][1] << "_|_" << g3[1][2] << "_" << endl;
+	cout << " " << g1[2][0] << " | " << g1[2][1] << " | " << g1[2][2] << "  ||  " << g2[0][0] << " | " << g2[0][1] << " | " << g2[0][2] << "  ||  " << g3[0][0] << " | " << g3[0][1] << " | " << g3[0][2] << " " << endl;
+	cout << "=========================================" << endl;
+	cout << "_" << g4[0][0] << "_|_" << g4[0][1] << "_|_" << g4[0][2] << "_ || _" << g5[0][0] << "_|_" << g5[0][1] << "_|_" << g5[0][2] << "_ || _" << g6[0][0] << "_|_" << g6[0][1] << "_|_" << g6[0][2] << "_" << endl;
+	cout << "_" << g4[1][0] << "_|_" << g4[1][1] << "_|_" << g4[1][2] << "_ || _" << g5[1][0] << "_|_" << g5[1][1] << "_|_" << g5[1][2] << "_ || _" << g6[1][0] << "_|_" << g6[1][1] << "_|_" << g6[1][2] << "_" << endl;
+	cout << " " << g4[2][0] << " | " << g4[2][1] << " | " << g4[2][2] << "  ||  " << g5[2][0] << " | " << g5[2][1] << " | " << g5[2][2] << "  ||  " << g6[2][0] << " | " << g6[2][1] << " | " << g6[2][2] << " " << endl;
+	cout << "=========================================" << endl;
+	cout << "_" << g7[0][0] << "_|_" << g7[0][1] << "_|_" << g7[0][2] << "_ || _" << g8[0][0] << "_|_" << g8[0][1] << "_|_" << g8[0][2] << "_ || _" << g9[0][0] << "_|_" << g9[0][1] << "_|_" << g9[0][2] << "_" << endl;
+	cout << "_" << g7[1][0] << "_|_" << g7[1][1] << "_|_" << g7[1][2] << "_ || _" << g8[1][0] << "_|_" << g8[1][1] << "_|_" << g8[1][2] << "_ || _" << g9[1][0] << "_|_" << g9[1][1] << "_|_" << g9[1][2] << "_" << endl;
+	cout << " " << g7[2][0] << " | " << g7[2][1] << " | " << g7[2][2] << "  ||  " << g8[2][0] << " | " << g8[2][1] << " | " << g8[2][2] << "  ||  " << g9[2][0] << " | " << g9[2][1] << " | " << g9[2][2] << " " << endl;
+}
 
 
 int main() {
 	// define variables
-	string willPlay = "nothing";
-	string Amove;
-	int oneOne = 0;
-	int oneTwo = 0;
-	int oneThree = 0;
-	int twoOne = 0;
-	int twoTwo = 0;
-	int twoThree = 0;
-	int threeOne = 0;
-	int threeTwo = 0;
-	int threeThree = 0;
-	bool isAWinner = true;
-	bool turnTaken = true;
-	int winOne = 0;
-	int winTwo = 0;
-	int winThree = 0;
-	int winFour = 0;
-	int winFive = 0;
-	int winSix = 0;
-	int winSeven = 0;
-	int winEight = 0;
-
+	char g1[3][3] = { {'_','_','_' }, { '_','_','_' }, {' ',' ',' '} };
+	char g2[3][3] = { {'_','_','_' }, { '_','_','_' }, {' ',' ',' '} };
+	char g3[3][3] = { {'_','_','_' }, { '_','_','_' }, {' ',' ',' '} };
+	char g4[3][3] = { {'_','_','_' }, { '_','_','_' }, {' ',' ',' '} };
+	char g5[3][3] = { {'_','_','_' }, { '_','_','_' }, {' ',' ',' '} };
+	char g6[3][3] = { {'_','_','_' }, { '_','_','_' }, {' ',' ',' '} };
+	char g7[3][3] = { {'_','_','_' }, { '_','_','_' }, {' ',' ',' '} };
+	char g8[3][3] = { {'_','_','_' }, { '_','_','_' }, {' ',' ',' '} };
+	char g9[3][3] = { {'_','_','_' }, { '_','_','_' }, {' ',' ',' '} };
+	char letsPlay = 'Y';
+	char letsPlay2 = 'Y';
+	bool play = false;
+	bool endGame = false;
+	int quad = 0;
+	int move = 0;
 	// Ask if player wants to play
-	while (willPlay != "Y") {
-		cout << "So, do you want to play tictactoe? Y or N" << endl;
-
-		cin >> willPlay;
-
-		if (willPlay == "Y") {
-
-			cout << "cool lets play" << endl;
-
-		}
-		else {
-
-			cout << " are you sure?" << endl;
-
-			cin >> willPlay;
-
-			if (willPlay == "Y") {
-
-				cout << "bye" << endl;
-
+	while (!(play)) {
+		cout << "Do you want to play? Y or N" << endl;
+		cin >> letsPlay;
+		switch (letsPlay)
+		{
+		case 'Y':
+			cout << "great!" << endl;
+			play = true;
+			break;
+		case 'N':
+			cout << "Are you sure? Y or N" << endl;
+			cin >> letsPlay2;
+			switch (letsPlay2){
+			case 'Y':
+				cout << "ok bye!";
+				break;
 				return 0;
+			case 'N':
+				cout << "Sooo...." << endl;
+				break;
+			default:
+				cout << "only input Y or N please" << endl;
+				break;
 			}
+			break;
+		default:
+			cout << "only input Y or N please" << endl;
+			break;
 		}
 	}
 	// start game
-	do {
+	while (!(endGame)) {
+		//draw game board
+		draw(g1,g2,g3,g4,g5,g6,g7,g8,g9);
 
-		cout << " It's player 1's turn" << endl;
+		cout << "choose a quadrant 1 - 9:";
+		cin >> quad;
+		cout << endl;
+		switch (quad){
+		case 1:
 
-		while (turnTaken) {
-			cout << "input a combonation of A,B,C and 1,2,3 to specify your move" << endl;
-			cin >> Amove;
-			if (Amove == "A1") {
-				if (oneOne > 0) {
-					cout << "move taken here already try again" << endl;
-				}
-				else {
-					oneOne++;
-					turnTaken = false;
-				}
-			}
-			else if (Amove == "A2") {
-				if (oneTwo > 0) {
-					cout << "move taken here already try again" << endl;
-				}
-				else {
-					oneTwo++;
-					turnTaken = false;
-				}
-			}
-			else if (Amove == "A3") {
-				if (oneThree > 0) {
-					cout << "move taken here already try again" << endl;
-				}
-				else {
-					oneThree++;
-					turnTaken = false;
-				}
-			}
-			else if (Amove == "B1") {
-				if (twoOne > 0) {
-					cout << "move taken here already try again" << endl;
-				}
-				else {
-					twoOne++;
-					turnTaken = false;
-				}
-			}
-			else if (Amove == "B2") {
-				if (twoTwo > 0) {
-					cout << "move taken here already try again" << endl;
-				}
-				else {
-					twoTwo++;
-					turnTaken = false;
-				}
-			}
-			else if (Amove == "B3") {
-				if (twoThree > 0) {
-					cout << "move taken here already try again" << endl;
-				}
-				else {
-					twoThree++;
-					turnTaken = false;
-				}
-			}
-			else if (Amove == "C1") {
-				if (threeOne > 0) {
-					cout << "move taken here already try again" << endl;
-				}
-				else {
-					threeOne++;
-					turnTaken = false;
-				}
-			}
-			else if (Amove == "C2") {
-				if (threeTwo > 0) {
-					cout << "move taken here already try again" << endl;
-				}
-				else {
-					threeTwo++;
-					turnTaken = false;
-				}
-			}
-			else if (Amove == "C3") {
-				if (threeThree > 0) {
-					cout << "move taken here already try again" << endl;
-				}
-				else {
-					threeThree++;
-					turnTaken = false;
-				}
-			}
-			else if (Amove == "C4") {
-				cout << "\n BOOM \n";
-			}
+			default:
+			break;
 		}
-		turnTaken = true;
-
-		// calculate win conditions
-		winOne = oneOne + oneTwo + oneThree;
-		winTwo = oneOne + twoTwo + threeThree;
-		winThree = oneThree + twoTwo + threeOne;
-		winFour = twoOne + twoTwo + twoThree;
-		winFive = threeThree + threeTwo + threeOne;
-		winSix = oneOne + twoOne + threeOne;
-		winSeven = oneTwo + twoTwo + threeTwo;
-		winEight = oneThree + twoThree + threeThree;
-
-		// check for win
-		if (winOne == 3) {
-
-			cout << "Player 1 wins" << endl;
-
-			return 0;
-
-		}
-		else if (winTwo == 3) {
-
-			cout << "Player 1 wins" << endl;
-
-			return 0;
-
-		}
-		else if (winThree == 3) {
-
-			cout << "Player 1 wins" << endl;
-
-			return 0;
-
-		}
-		else if (winFour == 3) {
-
-			cout << "Player 1 wins" << endl;
-
-			return 0;
-
-		}
-		else if (winFive == 3) {
-
-			cout << "Player 1 wins" << endl;
-
-			return 0;
-
-		}
-		else if (winSix == 3) {
-
-			cout << "Player 1 wins" << endl;
-
-			return 0;
-
-		}
-		else if (winSeven == 3) {
-
-			cout << "Player 1 wins" << endl;
-
-			return 0;
-
-		}
-		else if (winEight == 3) {
-
-			cout << "Player 1 wins" << endl;
-
-			return 0;
-
-		}
-		else {
-
-
-			// second players turn starts
-			cout << "Player 2's turn " << endl;
-
-			while (turnTaken) {
-				cout << "input a combonation of A,B,C and 1,2,3 to specify your move" << endl;
-				cin >> Amove;
-				if (Amove == "A1") {
-					if (oneOne > 0) {
-						cout << "move taken here already try again" << endl;
-					}
-					else {
-						oneOne += 10;
-						turnTaken = false;
-					}
-				}
-				else if (Amove == "A2") {
-					if (oneTwo > 0) {
-						cout << "move taken here already try again" << endl;
-					}
-					else {
-						oneTwo += 10;
-						turnTaken = false;
-					}
-				}
-				else if (Amove == "A3") {
-					if (oneThree > 0) {
-						cout << "move taken here already try again" << endl;
-					}
-					else {
-						oneThree += 10;
-						turnTaken = false;
-					}
-				}
-				else if (Amove == "B1") {
-					if (twoOne > 0) {
-						cout << "move taken here already try again" << endl;
-					}
-					else {
-						twoOne += 10;
-						turnTaken = false;
-					}
-				}
-				else if (Amove == "B2") {
-					if (twoTwo > 0) {
-						cout << "move taken here already try again" << endl;
-					}
-					else {
-						twoTwo += 10;
-						turnTaken = false;
-					}
-				}
-				else if (Amove == "B3") {
-					if (twoThree > 0) {
-						cout << "move taken here already try again" << endl;
-					}
-					else {
-						twoThree += 10;
-						turnTaken = false;
-					}
-				}
-				else if (Amove == "C1") {
-					if (threeOne > 0) {
-						cout << "move taken here already try again" << endl;
-					}
-					else {
-						threeOne += 10;
-						turnTaken = false;
-					}
-				}
-				else if (Amove == "C2") {
-					if (threeTwo > 0) {
-						cout << "move taken here already try again" << endl;
-					}
-					else {
-						threeTwo += 10;
-						turnTaken = false;
-					}
-				}
-				else if (Amove == "C3") {
-					if (threeThree > 0) {
-						cout << "move taken here already try again" << endl;
-					}
-					else {
-						threeThree += 10;
-						turnTaken = false;
-					}
-				}
-				else if (Amove == "C4") {
-					cout << "\n BOOM \n";
-				}
-			}
-			turnTaken = true;
+		cout << "choose a move 1 - 9:";
+		cin >> move;
+		// player 1's turn
 
 			// calculate win conditions
-			winOne = oneOne + oneTwo + oneThree;
-			winTwo = oneOne + twoTwo + threeThree;
-			winThree = oneThree + twoTwo + threeOne;
-			winFour = twoOne + twoTwo + twoThree;
-			winFive = threeThree + threeTwo + threeOne;
-			winSix = oneOne + twoOne + threeOne;
-			winSeven = oneTwo + twoTwo + threeTwo;
-			winEight = oneThree + twoThree + threeThree;
+
+			// check for win
+
+		// find where player 2 can move
+			
+			// if anywhere ask for proper selection
+
+		// second players turn starts
+			
+			//second player pics move (1 - 9)
+
+			// calculate win conditions
 
 			// check for player 2 win conditions
-			if (winOne == 30) {
-
-				cout << "Player 2 wins" << endl;
-
-				return 0;
-
-			}
-			else if (winTwo == 30) {
-
-				cout << "Player 2 wins" << endl;
-
-				return 0;
-
-			}
-			else if (winThree == 30) {
-
-				cout << "Player 2 wins" << endl;
-
-				return 0;
-
-			}
-			else if (winFour == 30) {
-
-				cout << "Player 2 wins" << endl;
-
-				return 0;
-
-			}
-			else if (winFive == 30) {
-
-				cout << "Player 2 wins" << endl;
-
-				return 0;
-
-			}
-			else if (winSix == 30) {
-
-				cout << "Player 2 wins" << endl;
-
-				return 0;
-
-			}
-			else if (winSeven == 30) {
-
-				cout << "Player 2 wins" << endl;
-
-				return 0;
-
-			}
-			else if (winEight == 30) {
-
-				cout << "Player 2 wins" << endl;
-
-				return 0;
-
-			}
-		}
-
-
-
-
-	} while (isAWinner);
+	}
 }
