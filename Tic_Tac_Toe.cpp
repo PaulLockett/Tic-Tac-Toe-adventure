@@ -7,6 +7,48 @@
 using namespace std;
 
 
+void intro() {
+	char letsPlay = 'Y';
+	char letsPlay2 = 'Y';
+	bool play = false;
+
+	// Ask if player wants to play
+	while (!(play)) {
+		cout << "Do you want to play? Y or N" << endl;
+		cin >> letsPlay;
+		switch (letsPlay)
+		{
+		case 'Y':
+			cout << "great!" << endl;
+			play = true;
+			break;
+		case 'N':
+			cout << "Are you sure? Y or N" << endl;
+			cin >> letsPlay2;
+
+			switch (letsPlay2) {
+			case 'Y':
+				cout << "ok fine but I'm goint to ask again anyway.";
+				break;
+			case 'N':
+				cout << "Sooo...." << endl;
+				break;
+			default:
+				cout << "only input Y or N please" << endl;
+				break;
+			}
+			break;
+		default:
+			cout << "only input Y or N please" << endl;
+			break;
+		}
+	}
+}
+
+void setup(string player1name, string player2name, char player1, char player2, char currentPlayer) {
+
+}
+
 void draw(char g1[3][3], char g2[3][3], char g3[3][3], char g4[3][3], char g5[3][3], char g6[3][3], char g7[3][3], char g8[3][3], char g9[3][3]) {
 	system("cls");
 	cout << "_" << g1[0][0] << "_|_" << g1[0][1] << "_|_" << g1[0][2] << "_ || _" << g2[0][0] << "_|_" << g2[0][1] << "_|_" << g2[0][2] << "_ || _" << g3[0][0] << "_|_" << g3[0][1] << "_|_" << g3[0][2] << "_" << endl;
@@ -22,7 +64,17 @@ void draw(char g1[3][3], char g2[3][3], char g3[3][3], char g4[3][3], char g5[3]
 	cout << " " << g7[2][0] << " | " << g7[2][1] << " | " << g7[2][2] << "  ||  " << g8[2][0] << " | " << g8[2][1] << " | " << g8[2][2] << "  ||  " << g9[2][0] << " | " << g9[2][1] << " | " << g9[2][2] << " " << endl;
 }
 
+void togglePlayer(char Player1, char Player2, char currentPlayer) {
 
+	if (currentPlayer == Player1)
+		currentPlayer = Player2;
+	else
+		currentPlayer = Player1;
+}
+
+void makeMove(char currentPlayer, char currentBoard[3][3]) {
+
+}
 int main() {
 	// define variables
 	char g1[3][3] = { {'_','_','_' }, { '_','_','_' }, {' ',' ',' '} };
@@ -34,44 +86,18 @@ int main() {
 	char g7[3][3] = { {'_','_','_' }, { '_','_','_' }, {' ',' ',' '} };
 	char g8[3][3] = { {'_','_','_' }, { '_','_','_' }, {' ',' ',' '} };
 	char g9[3][3] = { {'_','_','_' }, { '_','_','_' }, {' ',' ',' '} };
-	char letsPlay = 'Y';
-	char letsPlay2 = 'Y';
-	bool play = false;
 	bool endGame = false;
 	int quad = 0;
 	int move = 0;
-	// Ask if player wants to play
-	while (!(play)) {
-		cout << "Do you want to play? Y or N" << endl;
-		cin >> letsPlay;
-		switch (letsPlay)
-		{
-		case 'Y':
-			cout << "great!" << endl;
-			play = true;
-			break;
-		case 'N':
-			cout << "Are you sure? Y or N" << endl;
-			cin >> letsPlay2;
-			switch (letsPlay2){
-			case 'Y':
-				cout << "ok bye!";
-				break;
-				return 0;
-			case 'N':
-				cout << "Sooo...." << endl;
-				break;
-			default:
-				cout << "only input Y or N please" << endl;
-				break;
-			}
-			break;
-		default:
-			cout << "only input Y or N please" << endl;
-			break;
-		}
-	}
+	string player1name;
+	string player2name;
+	char player1;
+	char player2;
+	char currentPlayer;
+	
 	// start game
+	intro();
+	setup(player1name, player2name, player1, player2, currentPlayer);
 	while (!(endGame)) {
 		//draw game board
 		draw(g1,g2,g3,g4,g5,g6,g7,g8,g9);
