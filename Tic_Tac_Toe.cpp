@@ -45,8 +45,41 @@ void intro() {
 	}
 }
 
-void setup(string player1name, string player2name, char player1, char player2, char currentPlayer) {
+void setup(string &player1Name, string &player2Name, char &player1, char &player2, char &currentPlayer) {
+	char input;
+	bool x = true;
 
+	cout << "What is your name Player 1: ";
+	cin >> player1Name;
+	cout << endl;
+
+	cout << "What is your name Player 2: ";
+	cin >> player2Name;
+	cout << endl;
+	while (x) {
+		cout << player1Name << " do you want X or O";
+		cin >> input;
+		if (input != 'X' && input != 'O') {
+			cout << "please input an X or O";
+		}
+		else {
+			player1 = input;
+			x = false;
+		}
+	}
+
+	x = true;
+	while (x) {
+		cout << player2Name << " do you want X or O";
+		cin >> input;
+		if (input != 'X' && input != 'O') {
+			cout << "please input an X or O";
+		}
+		else {
+			player2 = input;
+			x = false;
+		}
+	}
 }
 
 void draw(char g1[3][3], char g2[3][3], char g3[3][3], char g4[3][3], char g5[3][3], char g6[3][3], char g7[3][3], char g8[3][3], char g9[3][3]) {
@@ -64,7 +97,7 @@ void draw(char g1[3][3], char g2[3][3], char g3[3][3], char g4[3][3], char g5[3]
 	cout << " " << g7[2][0] << " | " << g7[2][1] << " | " << g7[2][2] << "  ||  " << g8[2][0] << " | " << g8[2][1] << " | " << g8[2][2] << "  ||  " << g9[2][0] << " | " << g9[2][1] << " | " << g9[2][2] << " " << endl;
 }
 
-void togglePlayer(char Player1, char Player2, char currentPlayer) {
+void togglePlayer(char &Player1, char &Player2, char &currentPlayer) {
 
 	if (currentPlayer == Player1)
 		currentPlayer = Player2;
@@ -72,8 +105,13 @@ void togglePlayer(char Player1, char Player2, char currentPlayer) {
 		currentPlayer = Player1;
 }
 
-void makeMove(char currentPlayer, char currentBoard[3][3]) {
+void makeMove(string player1Name, string player2Name, char player1, char player2, char currentPlayer, char currentBoard[3][3]) {
+	if (currentPlayer == player1) {
+		
+	}
+	else {
 
+	}
 }
 int main() {
 	// define variables
@@ -89,15 +127,15 @@ int main() {
 	bool endGame = false;
 	int quad = 0;
 	int move = 0;
-	string player1name;
-	string player2name;
+	string player1Name;
+	string player2Name;
 	char player1;
 	char player2;
 	char currentPlayer;
 	
 	// start game
 	intro();
-	setup(player1name, player2name, player1, player2, currentPlayer);
+	setup(player1Name, player2Name, player1, player2, currentPlayer);
 	while (!(endGame)) {
 		//draw game board
 		draw(g1,g2,g3,g4,g5,g6,g7,g8,g9);
