@@ -45,7 +45,7 @@ void intro() {
 	}
 }
 
-void setup(string &player1Name, string &player2Name, char &player1, char &player2, char &currentPlayer) {
+void setup(string &player1Name, string &player2Name, string &currentPlayerName, char &player1, char &player2, char &currentPlayer) {
 	char input;
 	bool x = true;
 
@@ -75,6 +75,7 @@ void setup(string &player1Name, string &player2Name, char &player1, char &player
 	}
 
 	currentPlayer = player1;
+	currentPlayerName = player1Name;
 }
 
 void draw(char g1[3][3], char g2[3][3], char g3[3][3], char g4[3][3], char g5[3][3], char g6[3][3], char g7[3][3], char g8[3][3], char g9[3][3]) {
@@ -92,17 +93,21 @@ void draw(char g1[3][3], char g2[3][3], char g3[3][3], char g4[3][3], char g5[3]
 	cout << " " << g7[2][0] << " | " << g7[2][1] << " | " << g7[2][2] << "  ||  " << g8[2][0] << " | " << g8[2][1] << " | " << g8[2][2] << "  ||  " << g9[2][0] << " | " << g9[2][1] << " | " << g9[2][2] << " " << endl;
 }
 
-void togglePlayer(char &player1, char &player2, char &currentPlayer) {
+void togglePlayer(char &player1, char &player2, char &currentPlayer, string &player1Name, string &player2Name, string &currentPlayerName) {
 
-	if (currentPlayer == player1)
+	if (currentPlayer == player1) {
 		currentPlayer = player2;
-	else
+		currentPlayerName = player2Name;
+	}
+	else {
 		currentPlayer = player1;
+		currentPlayerName = player1Name;
+	}
 }
-
+/**
 void checkWins(int &quad, char &player1, char &player2, char &currentPlayer, string &player1Name, string &player2Name ) {
-
 }
+*/
 /*
 void makeMove(string player1Name, string player2Name, char player1, char player2, char currentPlayer, char g1[3][3], char g2[3][3], char g3[3][3], char g4[3][3], char g5[3][3], char g6[3][3], char g7[3][3], char g8[3][3], char g9[3][3]) {
 	int quad = 0;
@@ -143,6 +148,8 @@ int main() {
 	char g7[3][3] = { {'_','_','_' }, { '_','_','_' }, {' ',' ',' '} };
 	char g8[3][3] = { {'_','_','_' }, { '_','_','_' }, {' ',' ',' '} };
 	char g9[3][3] = { {'_','_','_' }, { '_','_','_' }, {' ',' ',' '} };
+	char p1[9] = { 'n','n', 'n', 'n', 'n', 'n', 'n', 'n', 'n' };
+	char p2[9] = { 'n','n', 'n', 'n', 'n', 'n', 'n', 'n', 'n' };
 	bool endGame = false;
 	bool goodSelect = false;
 	bool q1Win = false;
@@ -159,19 +166,20 @@ int main() {
 	char player1;
 	char player2;
 	char currentPlayer;
+	string currentPlayerName;
 	int quad = 0;
 	int move = 0;
 	
 	// start game
 	intro();
 
-	setup(player1Name, player2Name, player1, player2, currentPlayer);
+	setup(player1Name, player2Name, currentPlayerName, player1, player2, currentPlayer);
 
 	while (!(endGame)) {
 		//draw game board
 		draw(g1,g2,g3,g4,g5,g6,g7,g8,g9);
 
-		// ask for player input
+		// ask for and parce player input
 		while (!(goodSelect)) {
 			if (currentPlayer == player1) {
 				if (quad == 0) {
@@ -477,11 +485,12 @@ int main() {
 					}
 				}
 				else {
-				cout << "That quadrent is already won pick another" << endl;
+				cout << "That quadrent is already won pick another:" << endl;
+				cin >> quad;
 				}
 			}
-			else if (currentPlayer == player2) {
-				if (quad == 0) {
+
+			if (quad == 0) {
 					cout << player2Name << " choose a quadrant 1 - 9:";
 					cin >> quad;
 					cout << endl;
@@ -784,13 +793,864 @@ int main() {
 					}
 				}
 				else {
-				cout << "That quadrent is already won pick another" << endl;
+				cout << "That quadrent is already won pick another:" << endl;
+				cin >> quad;
 				}
 			}
 		}
 		goodSelect = false;
 
+		//win conditions
+		if (quad == 1) {
+			if (g1[0][0] == currentPlayer && g1[0][1] == currentPlayer && g1[0][2] == currentPlayer) {
+				q1Win = true;
+				quad = 0;
+				if (currentPlayer == player1) {
+					p1[0] = 'w';
+				}
+				else if (currentPlayer == player2) {
+					p2[0] = 'w';
+				}
+			}
+			else if (g1[1][0] == currentPlayer && g1[1][1] == currentPlayer && g1[1][2] == currentPlayer) {
+				q1Win = true;
+				quad = 0;
+				if (currentPlayer == player1) {
+					p1[0] = 'w';
+				}
+				else if (currentPlayer == player2) {
+					p2[0] = 'w';
+				}
+			}
+			else if (g1[2][0] == currentPlayer && g1[2][1] == currentPlayer && g1[2][2] == currentPlayer) {
+				q1Win = true;
+				quad = 0;
+				if (currentPlayer == player1) {
+					p1[0] = 'w';
+				}
+				else if (currentPlayer == player2) {
+					p2[0] = 'w';
+				}
+			}
+			else if (g1[0][0] == currentPlayer && g1[1][0] == currentPlayer && g1[2][0] == currentPlayer) {
+				q1Win = true;
+				quad = 0;
+				if (currentPlayer == player1) {
+					p1[0] = 'w';
+				}
+				else if (currentPlayer == player2) {
+					p2[0] = 'w';
+				}
+			}
+			else if (g1[0][1] == currentPlayer && g1[1][1] == currentPlayer && g1[2][1] == currentPlayer) {
+				q1Win = true;
+				quad = 0;
+				if (currentPlayer == player1) {
+					p1[0] = 'w';
+				}
+				else if (currentPlayer == player2) {
+					p2[0] = 'w';
+				}
+			}
+			else if (g1[0][2] == currentPlayer && g1[1][2] == currentPlayer && g1[2][2] == currentPlayer) {
+				q1Win = true;
+				quad = 0;
+				if (currentPlayer == player1) {
+					p1[0] = 'w';
+				}
+				else if (currentPlayer == player2) {
+					p2[0] = 'w';
+				}
+			}
+			else if (g1[0][0] == currentPlayer && g1[1][1] == currentPlayer && g1[2][2] == currentPlayer) {
+				q1Win = true;
+				quad = 0;
+				if (currentPlayer == player1) {
+					p1[0] = 'w';
+				}
+				else if (currentPlayer == player2) {
+					p2[0] = 'w';
+				}
+			}
+			else if (g1[2][0] == currentPlayer && g1[1][1] == currentPlayer && g1[0][2] == currentPlayer) {
+				q1Win = true;
+				quad = 0;
+				if (currentPlayer == player1) {
+					p1[0] = 'w';
+				}
+				else if (currentPlayer == player2) {
+					p2[0] = 'w';
+				}
+			}
+			else {
+				quad = move;
+			}
+		}
+		else if (quad == 2) {
+			if (g2[0][0] == currentPlayer && g2[0][1] == currentPlayer && g2[0][2] == currentPlayer) {
+				q2Win = true;
+				quad = 0;
+				if (currentPlayer == player1) {
+					p1[1] = 'w';
+				}
+				else if (currentPlayer == player2) {
+					p2[1] = 'w';
+				}
+			}
+			else if (g2[1][0] == currentPlayer && g2[1][1] == currentPlayer && g2[1][2] == currentPlayer) {
+				q2Win = true;
+				quad = 0;
+				if (currentPlayer == player1) {
+					p1[1] = 'w';
+				}
+				else if (currentPlayer == player2) {
+					p2[1] = 'w';
+				}
+			}
+			else if (g2[2][0] == currentPlayer && g2[2][1] == currentPlayer && g2[2][2] == currentPlayer) {
+				q2Win = true;
+				quad = 0;
+				if (currentPlayer == player1) {
+					p1[1] = 'w';
+				}
+				else if (currentPlayer == player2) {
+					p2[1] = 'w';
+				}
+			}
+			else if (g2[0][0] == currentPlayer && g2[1][0] == currentPlayer && g2[2][0] == currentPlayer) {
+				q2Win = true;
+				quad = 0;
+				if (currentPlayer == player1) {
+					p1[1] = 'w';
+				}
+				else if (currentPlayer == player2) {
+					p2[1] = 'w';
+				}
+			}
+			else if (g2[0][1] == currentPlayer && g2[1][1] == currentPlayer && g2[2][1] == currentPlayer) {
+				q2Win = true;
+				quad = 0;
+				if (currentPlayer == player1) {
+					p1[1] = 'w';
+				}
+				else if (currentPlayer == player2) {
+					p2[1] = 'w';
+				}
+			}
+			else if (g2[0][2] == currentPlayer && g2[1][2] == currentPlayer && g2[2][2] == currentPlayer) {
+				q2Win = true;
+				quad = 0;
+				if (currentPlayer == player1) {
+					p1[1] = 'w';
+				}
+				else if (currentPlayer == player2) {
+					p2[1] = 'w';
+				}
+			}
+			else if (g2[0][0] == currentPlayer && g2[1][1] == currentPlayer && g2[2][2] == currentPlayer) {
+				q2Win = true;
+				quad = 0;
+				if (currentPlayer == player1) {
+					p1[1] = 'w';
+				}
+				else if (currentPlayer == player2) {
+					p2[1] = 'w';
+				}
+			}
+			else if (g2[2][0] == currentPlayer && g2[1][1] == currentPlayer && g2[0][2] == currentPlayer) {
+				q2Win = true;
+				quad = 0;
+				if (currentPlayer == player1) {
+					p1[1] = 'w';
+				}
+				else if (currentPlayer == player2) {
+					p2[1] = 'w';
+				}
+			}
+			else {
+				quad = move;
+			}
+		}
+		else if (quad == 3) {
+		if (g3[0][0] == currentPlayer && g3[0][1] == currentPlayer && g3[0][2] == currentPlayer) {
+			q3Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[2] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[2] = 'w';
+			}
+		}
+		else if (g3[1][0] == currentPlayer && g3[1][1] == currentPlayer && g3[1][2] == currentPlayer) {
+			q3Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[2] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[2] = 'w';
+			}
+		}
+		else if (g3[2][0] == currentPlayer && g3[2][1] == currentPlayer && g3[2][2] == currentPlayer) {
+			q3Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[2] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[2] = 'w';
+			}
+		}
+		else if (g3[0][0] == currentPlayer && g3[1][0] == currentPlayer && g3[2][0] == currentPlayer) {
+			q3Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[2] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[2] = 'w';
+			}
+		}
+		else if (g3[0][1] == currentPlayer && g3[1][1] == currentPlayer && g3[2][1] == currentPlayer) {
+			q3Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[2] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[2] = 'w';
+			}
+		}
+		else if (g3[0][2] == currentPlayer && g3[1][2] == currentPlayer && g3[2][2] == currentPlayer) {
+			q3Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[2] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[2] = 'w';
+			}
+		}
+		else if (g3[0][0] == currentPlayer && g3[1][1] == currentPlayer && g3[2][2] == currentPlayer) {
+			q3Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[2] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[2] = 'w';
+			}
+		}
+		else if (g3[2][0] == currentPlayer && g3[1][1] == currentPlayer && g3[0][2] == currentPlayer) {
+			q3Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[2] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[2] = 'w';
+			}
+		}
+		else {
+			quad = move;
+		}
+		}
+		else if (quad == 4) {
+		if (g4[0][0] == currentPlayer && g4[0][1] == currentPlayer && g4[0][2] == currentPlayer) {
+			q4Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[0] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[0] = 'w';
+			}
+		}
+		else if (g4[1][0] == currentPlayer && g4[1][1] == currentPlayer && g4[1][2] == currentPlayer) {
+			q4Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[0] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[0] = 'w';
+			}
+		}
+		else if (g4[2][0] == currentPlayer && g4[2][1] == currentPlayer && g4[2][2] == currentPlayer) {
+			q4Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[0] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[0] = 'w';
+			}
+		}
+		else if (g4[0][0] == currentPlayer && g4[1][0] == currentPlayer && g4[2][0] == currentPlayer) {
+			q4Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[0] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[0] = 'w';
+			}
+		}
+		else if (g4[0][1] == currentPlayer && g4[1][1] == currentPlayer && g4[2][1] == currentPlayer) {
+			q4Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[0] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[0] = 'w';
+			}
+		}
+		else if (g4[0][2] == currentPlayer && g4[1][2] == currentPlayer && g4[2][2] == currentPlayer) {
+			q4Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[0] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[0] = 'w';
+			}
+		}
+		else if (g4[0][0] == currentPlayer && g4[1][1] == currentPlayer && g4[2][2] == currentPlayer) {
+			q4Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[0] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[0] = 'w';
+			}
+		}
+		else if (g4[2][0] == currentPlayer && g4[1][1] == currentPlayer && g4[0][2] == currentPlayer) {
+			q4Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[0] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[0] = 'w';
+			}
+		}
+		else {
+			quad = move;
+		}
+		} //
+		else if (quad == 5) {
+		if (g5[0][0] == currentPlayer && g5[0][1] == currentPlayer && g5[0][2] == currentPlayer) {
+			q5Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[4] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[4] = 'w';
+			}
+		}
+		else if (g5[1][0] == currentPlayer && g5[1][1] == currentPlayer && g5[1][2] == currentPlayer) {
+			q5Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[4] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[4] = 'w';
+			}
+		}
+		else if (g5[2][0] == currentPlayer && g5[2][1] == currentPlayer && g5[2][2] == currentPlayer) {
+			q5Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[4] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[4] = 'w';
+			}
+		}
+		else if (g5[0][0] == currentPlayer && g5[1][0] == currentPlayer && g5[2][0] == currentPlayer) {
+			q5Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[4] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[4] = 'w';
+			}
+		}
+		else if (g5[0][1] == currentPlayer && g5[1][1] == currentPlayer && g5[2][1] == currentPlayer) {
+			q5Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[4] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[4] = 'w';
+			}
+		}
+		else if (g5[0][2] == currentPlayer && g5[1][2] == currentPlayer && g5[2][2] == currentPlayer) {
+			q5Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[4] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[4] = 'w';
+			}
+		}
+		else if (g5[0][0] == currentPlayer && g5[1][1] == currentPlayer && g5[2][2] == currentPlayer) {
+			q5Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[4] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[4] = 'w';
+			}
+		}
+		else if (g5[2][0] == currentPlayer && g5[1][1] == currentPlayer && g5[0][2] == currentPlayer) {
+			q1Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[4] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[4] = 'w';
+			}
+		}
+		else {
+			quad = move;
+		}
+		}
+		else if (quad == 6) {
+		if (g6[0][0] == currentPlayer && g6[0][1] == currentPlayer && g6[0][2] == currentPlayer) {
+			q6Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[5] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[5] = 'w';
+			}
+		}
+		else if (g6[1][0] == currentPlayer && g6[1][1] == currentPlayer && g6[1][2] == currentPlayer) {
+			q6Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[5] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[5] = 'w';
+			}
+		}
+		else if (g6[2][0] == currentPlayer && g6[2][1] == currentPlayer && g6[2][2] == currentPlayer) {
+			q6Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[5] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[5] = 'w';
+			}
+		}
+		else if (g6[0][0] == currentPlayer && g6[1][0] == currentPlayer && g6[2][0] == currentPlayer) {
+			q6Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[5] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[5] = 'w';
+			}
+		}
+		else if (g6[0][1] == currentPlayer && g6[1][1] == currentPlayer && g6[2][1] == currentPlayer) {
+			q6Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[5] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[5] = 'w';
+			}
+		}
+		else if (g6[0][2] == currentPlayer && g6[1][2] == currentPlayer && g6[2][2] == currentPlayer) {
+			q6Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[5] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[5] = 'w';
+			}
+		}
+		else if (g6[0][0] == currentPlayer && g6[1][1] == currentPlayer && g6[2][2] == currentPlayer) {
+			q6Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[5] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[5] = 'w';
+			}
+		}
+		else if (g6[2][0] == currentPlayer && g6[1][1] == currentPlayer && g6[0][2] == currentPlayer) {
+			q6Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[5] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[5] = 'w';
+			}
+		}
+		else {
+			quad = move;
+		}
+		}
+		else if (quad == 7) {
+		if (g7[0][0] == currentPlayer && g7[0][1] == currentPlayer && g7[0][2] == currentPlayer) {
+			q7Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[6] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[6] = 'w';
+			}
+		}
+		else if (g7[1][0] == currentPlayer && g7[1][1] == currentPlayer && g7[1][2] == currentPlayer) {
+			q7Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[6] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[6] = 'w';
+			}
+		}
+		else if (g7[2][0] == currentPlayer && g7[2][1] == currentPlayer && g7[2][2] == currentPlayer) {
+			q7Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[6] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[6] = 'w';
+			}
+		}
+		else if (g7[0][0] == currentPlayer && g7[1][0] == currentPlayer && g7[2][0] == currentPlayer) {
+			q7Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[6] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[6] = 'w';
+			}
+		}
+		else if (g7[0][1] == currentPlayer && g7[1][1] == currentPlayer && g7[2][1] == currentPlayer) {
+			q7Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[6] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[6] = 'w';
+			}
+		}
+		else if (g7[0][2] == currentPlayer && g7[1][2] == currentPlayer && g7[2][2] == currentPlayer) {
+			q7Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[6] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[6] = 'w';
+			}
+		}
+		else if (g7[0][0] == currentPlayer && g7[1][1] == currentPlayer && g7[2][2] == currentPlayer) {
+			q7Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[6] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[6] = 'w';
+			}
+		}
+		else if (g7[2][0] == currentPlayer && g7[1][1] == currentPlayer && g7[0][2] == currentPlayer) {
+			q7Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[6] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[6] = 'w';
+			}
+		}
+		else {
+			quad = move;
+		}
+		}
+		else if (quad == 8) {
+		if (g8[0][0] == currentPlayer && g8[0][1] == currentPlayer && g8[0][2] == currentPlayer) {
+			q8Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[7] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[7] = 'w';
+			}
+		}
+		else if (g8[1][0] == currentPlayer && g8[1][1] == currentPlayer && g8[1][2] == currentPlayer) {
+			q8Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[7] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[7] = 'w';
+			}
+		}
+		else if (g8[2][0] == currentPlayer && g8[2][1] == currentPlayer && g8[2][2] == currentPlayer) {
+			q8Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[7] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[7] = 'w';
+			}
+		}
+		else if (g8[0][0] == currentPlayer && g8[1][0] == currentPlayer && g8[2][0] == currentPlayer) {
+			q8Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[7] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[7] = 'w';
+			}
+		}
+		else if (g8[0][1] == currentPlayer && g8[1][1] == currentPlayer && g8[2][1] == currentPlayer) {
+			q8Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[7] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[7] = 'w';
+			}
+		}
+		else if (g8[0][2] == currentPlayer && g8[1][2] == currentPlayer && g8[2][2] == currentPlayer) {
+			q8Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[7] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[7] = 'w';
+			}
+		}
+		else if (g8[0][0] == currentPlayer && g8[1][1] == currentPlayer && g8[2][2] == currentPlayer) {
+			q8Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[7] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[7] = 'w';
+			}
+		}
+		else if (g8[2][0] == currentPlayer && g8[1][1] == currentPlayer && g8[0][2] == currentPlayer) {
+			q8Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[7] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[7] = 'w';
+			}
+		}
+		else {
+			quad = move;
+		}
+		}
+		else if (quad == 9) {
+		if (g9[0][0] == currentPlayer && g9[0][1] == currentPlayer && g9[0][2] == currentPlayer) {
+			q9Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[8] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[8] = 'w';
+			}
+		}
+		else if (g9[1][0] == currentPlayer && g9[1][1] == currentPlayer && g9[1][2] == currentPlayer) {
+			q9Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[8] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[8] = 'w';
+			}
+		}
+		else if (g9[2][0] == currentPlayer && g9[2][1] == currentPlayer && g9[2][2] == currentPlayer) {
+			q9Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[8] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[8] = 'w';
+			}
+		}
+		else if (g9[0][0] == currentPlayer && g9[1][0] == currentPlayer && g9[2][0] == currentPlayer) {
+			q9Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[8] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[8] = 'w';
+			}
+		}
+		else if (g9[0][1] == currentPlayer && g9[1][1] == currentPlayer && g9[2][1] == currentPlayer) {
+			q9Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[8] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[8] = 'w';
+			}
+		}
+		else if (g9[0][2] == currentPlayer && g9[1][2] == currentPlayer && g9[2][2] == currentPlayer) {
+			q9Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[8] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[8] = 'w';
+			}
+		}
+		else if (g9[0][0] == currentPlayer && g9[1][1] == currentPlayer && g9[2][2] == currentPlayer) {
+			q9Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[8] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[8] = 'w';
+			}
+		}
+		else if (g9[2][0] == currentPlayer && g9[1][1] == currentPlayer && g9[0][2] == currentPlayer) {
+			q9Win = true;
+			quad = 0;
+			if (currentPlayer == player1) {
+				p1[8] = 'w';
+			}
+			else if (currentPlayer == player2) {
+				p2[8] = 'w';
+			}
+		}
+		else {
+			quad = move;
+		}
+		}
+		
+		
+		if (p1[0] == 'w' && p1[1] == 'w' && p1[2] == 'w') {
+			cout << currentPlayerName << " Wins!";
+			system("pause");
+			endGame = true;
+		}
+		else if (p1[3] == 'w' && p1[4] == 'w' && p1[5] == 'w') {
+			cout << currentPlayerName << " Wins!";
+			system("pause");
+			endGame = true;
+		}
+		else if (p1[6] == 'w' && p1[7] == 'w' && p1[8] == 'w') {
+			cout << currentPlayerName << " Wins!";
+			system("pause");
+			endGame = true;
+		}
+		else if (p1[0] == 'w' && p1[3] == 'w' && p1[6] == 'w') {
+			cout << currentPlayerName << " Wins!";
+			system("pause");
+			endGame = true;
+		}
+		else if (p1[1] == 'w' && p1[4] == 'w' && p1[7] == 'w') {
+			cout << currentPlayerName << " Wins!";
+			system("pause");
+			endGame = true;
+		}
+		else if (p1[2] == 'w' && p1[5] == 'w' && p1[8] == 'w') {
+			cout << currentPlayerName << " Wins!";
+			system("pause");
+			endGame = true;
+		}
+		else if (p1[0] == 'w' && p1[4] == 'w' && p1[8] == 'w') {
+			cout << currentPlayerName << " Wins!";
+			system("pause");
+			endGame = true;
+		}
+		else if (p1[6] == 'w' && p1[4] == 'w' && p1[2] == 'w') {
+			cout << currentPlayerName << " Wins!";
+			system("pause");
+			endGame = true;
+		}
+		
+		if (p2[0] == 'w' && p2[1] == 'w' && p2[2] == 'w') {
+			cout << currentPlayerName << " Wins!";
+			system("pause");
+			endGame = true;
+		}
+		else if (p2[3] == 'w' && p2[4] == 'w' && p2[5] == 'w') {
+			cout << currentPlayerName << " Wins!";
+			system("pause");
+			endGame = true;
+		}
+		else if (p2[6] == 'w' && p2[7] == 'w' && p2[8] == 'w') {
+			cout << currentPlayerName << " Wins!";
+			system("pause");
+			endGame = true;
+		}
+		else if (p2[0] == 'w' && p2[3] == 'w' && p2[6] == 'w') {
+			cout << currentPlayerName << " Wins!";
+			system("pause");
+			endGame = true;
+		}
+		else if (p2[1] == 'w' && p2[4] == 'w' && p2[7] == 'w') {
+			cout << currentPlayerName << " Wins!";
+			system("pause");
+			endGame = true;
+		}
+		else if (p2[2] == 'w' && p2[5] == 'w' && p2[8] == 'w') {
+			cout << currentPlayerName << " Wins!";
+			system("pause");
+			endGame = true;
+		}
+		else if (p2[0] == 'w' && p2[4] == 'w' && p2[8] == 'w') {
+			cout << currentPlayerName << " Wins!";
+			system("pause");
+			endGame = true;
+		}
+		else if (p2[6] == 'w' && p2[4] == 'w' && p2[2] == 'w') {
+			cout << currentPlayerName << " Wins!";
+			system("pause");
+			endGame = true;
+		}
+		
 		// swich players
-		togglePlayer(player1, player2, currentPlayer);
+		togglePlayer(player1, player2, currentPlayer, player1Name, player2Name, currentPlayerName);
 	}
 }
