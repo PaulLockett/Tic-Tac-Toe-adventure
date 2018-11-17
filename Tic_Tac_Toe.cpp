@@ -14,22 +14,26 @@ void intro() {
 
 	// Ask if player wants to play
 	while (!(play)) {
-		cout << "Do you want to play? Y or N" << endl;
+		cout << "Do you want to play? Y or N " << endl;
 		cin >> letsPlay;
 		switch (letsPlay)
 		{
+		case 'y':
 		case 'Y':
 			cout << "great!" << endl;
 			play = true;
 			break;
+		case 'n':
 		case 'N':
 			cout << "Are you sure? Y or N" << endl;
 			cin >> letsPlay2;
 
 			switch (letsPlay2) {
+			case 'y':
 			case 'Y':
 				cout << "ok fine but I'm goint to ask again anyway.";
 				break;
+			case 'n':
 			case 'N':
 				cout << "Sooo...." << endl;
 				break;
@@ -57,18 +61,18 @@ void setup(string &player1Name, string &player2Name, string &currentPlayerName, 
 	cin >> player2Name;
 	cout << endl;
 	while (x) {
-		cout << player1Name << " do you want X or O:";
+		cout << player1Name << " Do you want X or O: ";
 		cin >> input;
-		if (input != 'X' && input != 'O') {
+		if (input != 'X' && input != 'O' && input != 'x' && input != 'o') {
 			cout << endl;
 			cout << "please input an X or O:";
 		}
 		else {
 			player1 = input;
-			if (input == 'X') {
+			if (input == 'X' || input == 'x') {
 				player2 = 'O';
 			}
-			else if (input == 'O') {
+			else if (input == 'O' || input == 'o') {
 				player2 = 'X';
 			}
 			x = false;
@@ -188,39 +192,39 @@ int main() {
 					cin >> move;
 					goodSelectM = false;
 					while (!(goodSelectM)) {
-						if (move == 1 && (g[quad][0][0] != 'X' || g[quad][0][0] != 'O')) {
+						if (move == 1 && (g[quad][0][0] != 'X' && g[quad][0][0] != 'O')) {
 							g[quad][0][0] = player1;
 							goodSelectM = true;
 						}
-						else if (move == 2 && (g[quad][0][1] != 'X' || g[quad][0][1] != 'O')) {
+						else if (move == 2 && (g[quad][0][1] != 'X' && g[quad][0][1] != 'O')) {
 							g[quad][0][1] = player1;
 							goodSelectM = true;
 						}
-						else if (move == 3 && (g[quad][0][2] != 'X' || g[quad][0][2] != 'O')) {
+						else if (move == 3 && (g[quad][0][2] != 'X' && g[quad][0][2] != 'O')) {
 							g[quad][0][2] = player1;
 							goodSelectM = true;
 						}
-						else if (move == 4 && (g[quad][1][0] != 'X' || g[quad][1][0] != 'O')) {
+						else if (move == 4 && (g[quad][1][0] != 'X' && g[quad][1][0] != 'O')) {
 							g[quad][1][0] = player1;
 							goodSelectM = true;
 						}
-						else if (move == 5 && (g[quad][1][1] != 'X' || g[quad][1][1] != 'O')) {
+						else if (move == 5 && (g[quad][1][1] != 'X' && g[quad][1][1] != 'O')) {
 							g[quad][1][1] = player1;
 							goodSelectM = true;
 						}
-						else if (move == 6 && (g[quad][1][2] != 'X' || g[quad][1][2] != 'O')) {
+						else if (move == 6 && (g[quad][1][2] != 'X' && g[quad][1][2] != 'O')) {
 							g[quad][1][2] = player1;
 							goodSelectM = true;
 						}
-						else if (move == 7 && (g[quad][2][0] != 'X' || g[quad][2][0] != 'O')) {
+						else if (move == 7 && (g[quad][2][0] != 'X' && g[quad][2][0] != 'O')) {
 							g[quad][2][0] = player1;
 							goodSelectM = true;
 						}
-						else if (move == 8 && (g[quad][2][1] != 'X' || g[quad][2][1] != 'O')) {
+						else if (move == 8 && (g[quad][2][1] != 'X' && g[quad][2][1] != 'O')) {
 							g[quad][2][1] = player1;
 							goodSelectM = true;
 						}
-						else if (move == 9 && (g[quad][2][2] != 'X' || g[quad][2][2] != 'O')) {
+						else if (move == 9 && (g[quad][2][2] != 'X' && g[quad][2][2] != 'O')) {
 							g[quad][2][2] = player1;
 							goodSelectM = true;
 						}
@@ -299,44 +303,84 @@ int main() {
 
 		//win conditions
 		if (g[quad][0][0] == currentPlayer && g[quad][0][1] == currentPlayer && g[quad][0][2] == currentPlayer) {
-			win_q[quad] = true;
-			quad = 0;
 			p[quad - 1] = 'w';
+			if (win_q[quad] == true){
+				quad = 0;
+			}
+			else{
+				win_q[quad] = true;
+				quad = move;
+			}
 		}
 		else if (g[quad][1][0] == currentPlayer && g[quad][1][1] == currentPlayer && g[quad][1][2] == currentPlayer) {
-			win_q[quad] = true;
-			quad = 0;
 			p[quad - 1] = 'w';
+			if (win_q[quad] == true){
+				quad = 0;
+			}
+			else{
+				win_q[quad] = true;
+				quad = move;
+			}
 		}
 		else if (g[quad][2][0] == currentPlayer && g[quad][2][1] == currentPlayer && g[quad][2][2] == currentPlayer) {
-			win_q[quad] = true;
-			quad = 0;
 			p[quad - 1] = 'w';
+			if (win_q[quad] == true){
+				quad = 0;
+			}
+			else{
+				win_q[quad] = true;
+				quad = move;
+			}
 		}
 		else if (g[quad][0][0] == currentPlayer && g[quad][1][0] == currentPlayer && g[quad][2][0] == currentPlayer) {
-			win_q[quad] = true;
-			quad = 0;
 			p[quad - 1] = 'w';
+			if (win_q[quad] == true){
+				quad = 0;
+			}
+			else{
+				win_q[quad] = true;
+				quad = move;
+			}
 		}
 		else if (g[quad][0][1] == currentPlayer && g[quad][1][1] == currentPlayer && g[quad][2][1] == currentPlayer) {
-			win_q[quad] = true;
-			quad = 0;
 			p[quad - 1] = 'w';
+			if (win_q[quad] == true){
+				quad = 0;
+			}
+			else{
+				win_q[quad] = true;
+				quad = move;
+			}
 		}
 		else if (g[quad][0][2] == currentPlayer && g[quad][1][2] == currentPlayer && g[quad][2][2] == currentPlayer) {
-			win_q[quad] = true;
-			quad = 0;
 			p[quad - 1] = 'w';
+			if (win_q[quad] == true){
+				quad = 0;
+			}
+			else{
+				win_q[quad] = true;
+				quad = move;
+			}
 		}
 		else if (g[quad][0][0] == currentPlayer && g[quad][1][1] == currentPlayer && g[quad][2][2] == currentPlayer) {
-			win_q[quad] = true;
-			quad = 0;
 			p[quad - 1] = 'w';
+			if (win_q[quad] == true){
+				quad = 0;
+			}
+			else{
+				win_q[quad] = true;
+				quad = move;
+			}
 		}
 		else if (g[quad][2][0] == currentPlayer && g[quad][1][1] == currentPlayer && g[quad][0][2] == currentPlayer) {
-			win_q[quad] = true;
-			quad = 0;
 			p[quad - 1] = 'w';
+			if (win_q[quad] == true){
+				quad = 0;
+			}
+			else{
+				win_q[quad] = true;
+				quad = move;
+			}
 		}
 		else {
 			quad = move;
